@@ -10,27 +10,33 @@
  */
 class Solution {
 public:
-    int getLen(ListNode* head){
-        int n = 0;
-        while(head){
-            head = head->next;
-            n++;
-        }
-        return n;
-    }
     ListNode* swapNodes(ListNode* head, int k) {
-        int n = getLen(head);
-        ListNode*a=NULL, *b=NULL, *start = head;
-        int curr=1;
-        while(start){
-            if(curr==k)a=start;
-            if(curr==n-k+1)b=start;
-            curr++;
-            start=start->next;
+        ListNode *temp=new ListNode(),*kth,*nkth;
+        temp->next = head;
+        int c=0;
+        ListNode *ans=temp;
+        while(temp){
+            if(c==k){
+                kth=temp;
+            }
+            else if(c==k){
+                nkth=head;
+            }
+            else if(c>k){
+                nkth=nkth->next;
+            }
+            temp=temp->next;
+            c++;
         }
-        int temp=a->val;
-        a->val = b->val;
-        b->val = temp;
-        return head;
+        cout<<kth->val<<' '<<nkth->val<<endl;
+        //ListNode *t1=kth->next,*t2=kth->next->next,*t3=nkth->next->next;
+        //kth->next = nkth->next;
+        //kth->next->next = t2;
+        //nkth->next = t1;
+        //nkth->next->next = t3;
+        int temper = kth->val;
+        kth->val = nkth->val;
+        nkth->val = temper;
+        return ans->next;
     }
 };
